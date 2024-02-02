@@ -1,13 +1,13 @@
 name: Linting Dockerfiles 🐳
-on:
- pull_request:
-    branches:
-    - '!main'
-    paths: 
-    - Dockerfile
-    - bedrock/Dockerfile
 
- workflow_dispatch:
+on:
+  workflow_call:
+    inputs:
+      path:
+        type: string
+        required: true
+
+   workflow_dispatch:
 
 jobs:
   docker-lint:
