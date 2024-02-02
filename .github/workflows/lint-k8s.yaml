@@ -1,0 +1,23 @@
+name: Linting Kubernetes ☸️
+on:
+
+  workflow_call:
+    inputs:
+      file-path:
+        type: string
+        required: true
+        
+  workflow_dispatch:
+
+jobs:
+    k8s-lint:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: kustomize-everything/action-yaml-linter@main
+          with:
+            yamllint_file_or_dir: ${{ inputs.file-path }}
+            yamllint_strict: false
+            yamllint_comment: true
+          env:
+            GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
