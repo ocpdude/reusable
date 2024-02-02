@@ -3,17 +3,17 @@ name: Linting Dockerfiles 🐳
 on:
   workflow_call:
     inputs:
-      path:
+      file-path:
         type: string
         required: true
 
-   workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-  docker-lint:
+  lint-dockerfile:
       runs-on: ubuntu-latest
       steps:
       - uses: actions/checkout@v4
       - uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: Dockerfile
+          dockerfile: ${{ inputs.file-path }}
